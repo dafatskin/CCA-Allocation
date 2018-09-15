@@ -85,7 +85,7 @@ def p2_assignUnderQuota(quota, LOC, rank, final_dic, CCA_dic):
         score=0
           for rank in CCA_ranking[name]:
             score=score+rank
-        psychomotor.run()
+        psychomotor.run(psymo)
         score_dict[name]=str(score)
       else:
         score=0
