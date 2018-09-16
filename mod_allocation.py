@@ -2,7 +2,6 @@
 #Allocation module#
 ###################
 
-import psychomotor
 
 def p2_assignDSA(DSA, final_dic, CCA_dic):
     """
@@ -72,25 +71,42 @@ def p2_assignUnderQuota(quota, LOC, rank, final_dic, CCA_dic):
     return final_dic, CCA_dic, CCAs_left
 
   
-  def p2_calculate_score(CCA, name_cat, psymo, CCA_ranking, MEP, DSA):
+ def p2_calculate_score(CCA, name_cat, psymo, CCA_ranking, MEP, config_vars):
     score=0
     score_dict={}
-    for name, cat in name_cat.dic.items():
-      if cat=="performing_arts":        
-          score=100
-          for rank in CCA_ranking[name]:
-            score=score+rank
-          score_dict[name]=str(score)
-      elif cat=="sports":
-        score=0
-          for rank in CCA_ranking[name]:
-            score=score+rank
-        psychomotor.run(psymo)
-        score_dict[name]=str(score)
-      else:
-        score=0
-          for rank in CCA_ranking[name]:
-            score=score+rank
-        score_dict[name]=str(score)  
-        
+    for name, cat in name_cat.items():
+        if cat=="PERFORMING ARTS":        
+            score=100
+            try:
+                for placeholder, rank in CCA_ranking[CCA][name]:
+                    score=score+int(rank)
+            except:
+                pass
+            score_dict[name]=str(score)
+        elif cat=="SPORTS":
+            score=0
+            scoring_details = config_vars["scoring details"][CCA]
+            if scoring_details["rankscoring"] == "on":
+                try:
+                    for placeholder, rank in CCA_ranking[CCA][name].items():
+                        score=score+int(rank)
+                except KeyError:
+                    pass
+            else:
+                pass
+
+            lst = ["Height", "30m", "IPU", "SBJ"]
+            for i in lst:
+                var = psymo.dic[name][i]
+                if var == None:
+                    var = 0
+                else:
+                    pass
+                if var>=float(scoring_details[i]["criteria"]):
+                    score+=float(scoring_details[i]["other"])
+                else:
+                    score+=float(scoring_details[i]["default"])
+
+            score_dict[name]=str(score)  
+    
     return score_dict
