@@ -20,7 +20,7 @@ def main(config_file):
 
     final_dic, CCA_dic = {}, {}
 
-    #run data processes#
+    #Phase 1 Data#
     config_vars = modD.configure_variables(config_file) #config_vars
     file = config_vars["file names"]["unallocated"] #get name of xlsx file
     master_list = modD.extract_data(file, config_vars) #extract data
@@ -33,34 +33,40 @@ def main(config_file):
     psymo = sheetdata("psychomotor", modD.data_to_psychomotor(master_list))
 
     list_of_CCA = [] #get a list of CCAs
-    for key, value in config_vars.items():
-        for key, value in value.items():
-            list_of_CCA.append(key)
+    for key, value in config_vars["data formats"].items():
+        list_of_CCA.append(key)
     del list_of_CCA[0:6]
-    del list_of_CCA[-1]
 
-    CCA_Ranking = {} #dic of all CCAs
+    CCA_ranking = {} #dic of all CCAs
     for cca in list_of_CCA:
-        CCA_Ranking[cca] = modD.data_to_CCA(master_list, cca)
+        CCA_ranking[cca] = modD.data_to_CCA(master_list, cca)
 
-    print("data processes complete")
+    print("Phase 1: Data extraction, complete\n")
 
     #Phase 2 Allocation#
     print("Assigning by score")
     final_dic, CCA_dic = modA.p2_assignDSA(DSA, final_dic, CCA_dic)
     for rank in ["LO1", "LO2", "LO3", "LO4", "LO5", "LO6", "LO7", "LO8", "LO9"]:
-        final_dic, CCA_dic, CCAs_left = modA.p2_assignUnderQuota(quota, LOC, rank, final_dic, CCA_dic) #assign under quota
-    #=modA.calculate_score()
+        final_dic, CCA_dic, CCAs_left = modA.p2_assignUnderQuota(quota, psymo, CCA_ranking, MEP, LOC, rank, final_dic, CCA_dic, config_vars) #assign under quota
+        for CCA in CCAs_left:
+            nameCat = modD.data_to_nameCat(LOC, quota, rank, CCA)
+            scorelist = modA.p2_calculate_score(CCA, nameCat, psymo, CCA_ranking, MEP, config_vars)
+            final_dic, CCA_dic = modA.p2_allocateByScore(CCA, nameCat, quota, rank, scorelist, final_dic, CCA_dic)
 
-    print(final_dic, "\n", CCA_dic)
+    print("Phase 2: Allocation by score, complete\n")
+    
+    #Phase 3 Allocation#
+    print("Assigning remainder")
+    final_dic, CCA_dic = modA.p3_allocateRemainder(quota, master_list, CCA_dic, final_dic)
 
-    print("Phase 1 Allocation complete")
+    print("Phase 3: Allocation of remainder, complete\n")
 
+    #Phase 4 Allocation#
+    print("Reassigning")
+    final_dic, CCA_dic = modA.p4_reassignment(final_dic, CCA_dic)
+    
+    #Phase 5 Report
+    
+    final_report.p5_report(CCA_dic)
 
     print("All complete")
-
-
-start = timeit.default_timer()
-main(config_file)
-stop = timeit.default_timer()
-print("Runtime: ", stop-start)
