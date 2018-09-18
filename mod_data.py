@@ -53,6 +53,24 @@ def configure_variables(config_file):
             elif section == "file names--": #section specifying file names
                 elements = line.strip("\n").split(":")
                 to_add[elements[0]] = elements[1]
+            elif section == "scoring details--": #section specifying scoring details
+                elements = line.strip("\n").split(":")
+                elements.append(elements[1].split(","))
+                del elements[1]
+                details = {}
+
+                for i in range(len(elements[1])): #for each detail
+                    if elements[1][i] == "on" or elements[1][i] == "off":
+                        details["rankscoring"] = elements[1][i]
+                    else:
+                        var = elements[1][i].split("-")
+                        lst = ["Height", "30m", "IPU", "SBJ", "1km"]
+                        details[lst[i]] = {"default":var[0], "other":var[1], "criteria":var[2]}
+
+                elements.append(details)
+                del elements[1]
+
+                to_add[elements[0]] = elements[1]
             elif section == "None":
                 pass
             else:
@@ -166,7 +184,14 @@ def data_to_LOC(dic):
     qdic = {}
     for key, value in pdic.items():
         for NRIC, choices in dic_choices.items():
-            qdic[NRIC] = choices[value]
+            choice = ""
+            if choices[value] == "01SCOUT":
+                choice = "O1"
+            elif choices[value] == "02SCOUT":
+                choice = "O2"
+            else:
+                choice = choices[value]
+            qdic[NRIC] = choice
         final_dic[key] = qdic
         qdic = {}
 
@@ -258,52 +283,57 @@ def data_to_CCA(dic, CCA):
     for key, value in dic_CCA.items():
         try:
             del value["Class"]
-        except:
+        except KeyError:
             del value["CLASS"]
+        try:
+            del value["Category"]
+        except:
+            pass
         final_dic[key] = value
+
+    try:
+        del final_dic["Name"]
+    except KeyError:
+        pass
 
     return final_dic
 
 
-def data_to_nameCat(dic, quota, CCA):
+def data_to_nameCat(LOC, quota, rank, CCA):
     """
     """
 
-    dic_quota = quota
+    final_dic = {}
+    
+    dic_quota = quota.dic
+
+    cat = ""
 
     for category, dic_CCAs in dic_quota.items():
         for cca, quota in dic_CCAs.items():
             if cca == CCA:
-                return category
+                cat = category
             else:
                 pass
-    
-    
 
+    CCA_LOC = {} #reverse LOC
+    for name, cca in LOC.dic[rank].items():
+        try:
+            lst = CCA_LOC[cca]
+            lst.append(name)
+            CCA_LOC[cca] = lst
+        except KeyError:
+            CCA_LOC[cca] = [name]
 
-#Test zone#
-##start = timeit.default_timer()
-##config_vars = configure_variables("Config file.txt")
-##stop = timeit.default_timer()
-##print("Runtime: ", stop-start)
-##print("")
-##
-##start1 = timeit.default_timer()
-##master_list = extract_data("unallocated.xlsx", config_vars)
-##stop1 = timeit.default_timer()
-##print('Runtime: ', stop1-start1)
-##print("")
-##
-##start2 = timeit.default_timer()
-##list_of_firsts = data_to_LOF(master_list)
-##stop2 = timeit.default_timer()
-##print('Runtime: ', stop2-start2)
-##print("")
-##
-##start3 = timeit.default_timer()
-##DSA_students = data_to_DSA(master_list)
-##stop3 = timeit.default_timer()
-##print('Runtime: ', stop3-start3)
-##print("")
-##
-##print('Total runtime: ', stop3-start)
+    try:
+        for name in CCA_LOC[CCA]:
+            final_dic[name] = cat
+    except KeyError:
+        pass
+
+    try:
+        del final_dic["Name"]
+    except KeyError:
+        pass
+    
+    return final_dic
