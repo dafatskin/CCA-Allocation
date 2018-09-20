@@ -19,7 +19,8 @@ The current build status of this project is:
 ## Installation
 Check that you are browsing the branch called Master
 Click the green button called 
-!(/CEP_FinalProject_2018/Download.PNG?raw=true)
+
+![](CEP_FinalProject_2018/Screenshots/Download.PNG)
 
 ## How to Use?
 - 
