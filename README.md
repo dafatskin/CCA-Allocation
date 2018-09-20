@@ -20,7 +20,7 @@ The current build status of this project is:
 Check that you are browsing the branch called Master
 Click the green button called 
 
-![](CEP_FinalProject_2018/Screenshots/Download.PNG?raw=true)
+![Download](CEP_FinalProject_2018/Screenshots/Download.PNG?raw=true)
 
 ## How to Use?
 - 
