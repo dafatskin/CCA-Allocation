@@ -13,8 +13,8 @@ The current build status of this project is:
 
 ## Features
 - Relatively quick runtime that can deal with any amount of data.
-- Easy usage and simple interface
-- Removes manpower aspect from this 
+- Easy usage and simple interface.
+- Reduces time and effort needed to finish this task.
 
 ## Installation
 This program uses a .py file to run so [Python](https://www.python.org/downloads/) should be downloaded to access and run the file.
@@ -22,14 +22,20 @@ This program uses a .py file to run so [Python](https://www.python.org/downloads
 Click on the button shown and download the entire repository.
 ![Download](https://github.com/dafatskin/CEP_FinalProject_2018/blob/master/Screenshots/Download.PNG?raw=true)
 
+The program has been installed!
+
 ## How to Use?
-- 
+1. Paste your excel sheet into the folder. Make sure that all spaces in the name of the file is replaced with an underscore (i.e "_")
+
+2. Edit config_file.txt
+-- config_file.txt has four parts to edit based on the configuration of the excel file.
+
 
 ## Allocation of work
-This section is for grading purposes only.
+**This section is for grading purposes only.**
 
 ## Credits
-I would like to thank Mrs Neo for guiding us through
+I would like to thank Mrs Neo for guiding us through this project giving us 
 
 
 Reminder for future Noah to finish writing this in the near future
