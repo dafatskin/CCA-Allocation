@@ -17,7 +17,9 @@ The current build status of this project is:
 - Removes manpower aspect from this 
 
 ## Installation
+<p>
 Click on the button shown below and download the entire repository.
+  </p>
 ![Download](https://github.com/dafatskin/CEP_FinalProject_2018/blob/master/Screenshots/Download.PNG?raw=true)
 
 ## How to Use?
