@@ -50,7 +50,13 @@ It consists of multiple elements in the format:
 (CCAName):(Score below criteria value)-(Score above criteria value)-(Criteria)
 
 ### Run the code
-Click the file called "start.py". You should receive 
+Click the file called "start.py". You should receive:
+1. "final_report.docx" regarding the efficiency of the code and how the code performed.
+2. "allocated.xlsx" which is the original file but with the allocations filled up.
+3. Multiple excel sheets with the name of each class, the students in the class and the allocations assigned to them in a folder called "Class Allocations"
+4. Multiple excel sheets with the name of each CCA and the students allocated to the CCA in a folder called "CCA Allocations"
+
+
 
 
 
