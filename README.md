@@ -26,10 +26,13 @@ The program has been installed!
 
 ## How to Use?
 1. Paste your excel sheet into the folder. Make sure that all spaces in the name of the file is replaced with an underscore (i.e "_")
+Ensure that your file is saved in the .xlsx format
 
 2. Edit config_file.txt
--- config_file.txt has four parts to edit based on the configuration of the excel file.
+- config_file.txt has four parts to edit based on the configuration of the excel file.
 
+-The first part is in "file names". It will be in the format: unallocated:(FileName).
+Change the (FileName) to the name of your excel sheet.
 
 ## Allocation of work
 **This section is for grading purposes only.**
@@ -38,6 +41,5 @@ The program has been installed!
 I would like to thank Mrs Neo for guiding us through this project giving us 
 
 
-Reminder for future Noah to finish writing this in the near future
 
 
