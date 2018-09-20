@@ -17,8 +17,7 @@ The current build status of this project is:
 - Removes manpower aspect from this 
 
 ## Installation
-Check that you are browsing the branch called Master
-Click the green button called 
+Check that you are browsing the branch called Master.
 
 ![Download](https://github.com/dafatskin/CEP_FinalProject_2018/blob/master/Screenshots/Download.PNG?raw=true)
 
