@@ -2,7 +2,7 @@
 CCA Allocation for Singapore Schools
 </h1>
 
-A CCA allocation program coded in Python. 
+A CCA allocation program coded in **Python**. 
 Made by Gerald Nyeo And Noah "dafatskin" Lim.
 
 ## Introduction
@@ -17,15 +17,19 @@ The current build status of this project is:
 - Removes manpower aspect from this 
 
 ## Installation
-<p>
-Click on the button shown below and download the entire repository.
-  </p>
+This program uses a .py file to run so [Python](https://www.python.org/downloads/) should be downloaded to access and run the file.
+
+Click on the button shown and download the entire repository.
 ![Download](https://github.com/dafatskin/CEP_FinalProject_2018/blob/master/Screenshots/Download.PNG?raw=true)
 
 ## How to Use?
 - 
 
+## Allocation of work
+This section is for grading purposes only.
 
+## Credits
+I would like to thank Mrs Neo for guiding us through
 
 
 Reminder for future Noah to finish writing this in the near future
