@@ -42,11 +42,11 @@ Change the (FileName) to the name of your excel sheet.
 Change the values accordingly.
 
 **Example**
-This is the top right hand column.(Circled)
-![Top Right](https://github.com/dafatskin/CEP_FinalProject_2018/blob/master/Screenshots/Snip1.PNG?raw=true)
+This is the top left hand column.(Circled)
+![Top Left](https://github.com/dafatskin/CEP_FinalProject_2018/blob/master/Screenshots/Snip1.PNG?raw=true)
 
-This is the bottom left column.(Circled)
-![Bottom Leftt](https://github.com/dafatskin/CEP_FinalProject_2018/blob/master/Screenshots/snip2.PNG?raw=true)
+This is the bottom right column.(Circled)
+![Bottom Right](https://github.com/dafatskin/CEP_FinalProject_2018/blob/master/Screenshots/snip2.PNG?raw=true)
 
 As such, the formatting for that tab would be:
 classlist:A1-I399-NAME
