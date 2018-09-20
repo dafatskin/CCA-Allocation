@@ -25,14 +25,36 @@ Click on the button shown and download the entire repository.
 The program has been installed!
 
 ## How to Use?
-1. Paste your excel sheet into the folder. Make sure that all spaces in the name of the file is replaced with an underscore (i.e "_")
+Paste your excel sheet into the folder. Make sure that all spaces in the name of the file is replaced with an underscore (i.e "_")
 Ensure that your file is saved in the .xlsx format
 
-2. Edit config_file.txt
-- config_file.txt has four parts to edit based on the configuration of the excel file.
+### Configure excel sheet
+Download draft.xlsx and follow the format given in the excel sheet. 
 
--The first part is in "file names". It will be in the format: unallocated:(FileName).
+### Edit config_file.txt
+config_file.txt has four parts to edit based on the configuration of the excel file.-
+
+1. The first part is in "file names". It will be in the format: unallocated:(FileName).
 Change the (FileName) to the name of your excel sheet.
+
+2. The second part is in "data formats". It consists of multiple elements in the format: 
+(TabName):(Top Left-most cell)-(Bottom Right-most cell)-(Name of Header for Student ID)
+Change the values accordingly.
+
+**Example**
+
+
+3. The third part is in "scoring details". Scoring is a function in our code that relies on the psychomotor values in the excel sheet as a factor to allocate the students. These values have been pre assigned and do not need to be edited but an edit is okay.
+
+It consists of multiple elements in the format:
+(CCAName):(Score below criteria value)-(Score above criteria value)-(Criteria)
+
+### Run the code
+Click the file called "start.py". You should receive 
+
+
+
+
 
 ## Allocation of work
 **This section is for grading purposes only.**
