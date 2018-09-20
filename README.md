@@ -42,7 +42,11 @@ Change the (FileName) to the name of your excel sheet.
 Change the values accordingly.
 
 **Example**
+This is the top right hand column.(Circled)
+![Top Right](https://github.com/dafatskin/CEP_FinalProject_2018/blob/master/Screenshots/Snip1.PNG?raw=true)
 
+This is the bottom left column.(Circled)
+![Bottom Left](https://github.com/dafatskin/CEP_FinalProject_2018/blob/master/Screenshots/snip2.PNG?raw=true)
 
 3. The third part is in "scoring details". Scoring is a function in our code that relies on the psychomotor values in the excel sheet as a factor to allocate the students. These values have been pre assigned and do not need to be edited but an edit is okay.
 
