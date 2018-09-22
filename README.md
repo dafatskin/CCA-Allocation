@@ -36,6 +36,8 @@ config_file.txt has four parts to edit based on the configuration of the excel f
 
 1. The first part is in "file names". It will be in the format: unallocated:(FileName).
 Change the (FileName) to the name of your excel sheet.
+E.g if your excel sheet is named: "an excel sheet", it would look like this:
+unallocated:an_excel_sheet
 
 2. The second part is in "data formats". It consists of multiple elements in the format: 
 (TabName):(Top Left-most cell)-(Bottom Right-most cell)-(Name of Header for Student ID)
