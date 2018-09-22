@@ -66,7 +66,7 @@ Click the file called "start.py". You should receive:
 
 ## Allocation of work
 **This section is for grading purposes only.**
-Gerald did most if not all of the main code after brainstorming with Noah who provided the basic framework and logic behind the code. Noah did most of the admin with Gerald helping him to formulate and organize his README. Gerald also helped with the Presentation code.
+Gerald did most of the main assigment code after brainstorming with Noah who provided the basic framework and logic behind the code. Noah did most of the admin with Gerald helping us to formulate and organize our README. Noah also contributed most of the presentation code, helped slightly by Gerald.
 
 ## Credits
 I would like to thank Mrs Neo for guiding us through this project giving us advice and support.
