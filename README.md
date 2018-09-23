@@ -9,7 +9,7 @@ Made by Gerald Nyeo And Noah "dafatskin" Lim.
 This project is commissioned by Raffles Institution, Singapore, first for grading for our Computer Elective Program(CEP) and hopefully for proper use in the school's allocation system.
 
 The current build status of this project is: 
-## Ongoing 
+### FINISHED 
 
 ## Features
 - Relatively quick runtime that can deal with any amount of data.
@@ -57,10 +57,10 @@ This is the bottom right column.(Circled)
 As such, the formatting for that tab would be:
 classlist:A1-I399-NAME
 
-3. The third part is in "scoring details". Scoring is a function in our code that relies on the psychomotor values in the excel sheet as a factor to allocate the students. These values have been pre assigned and do not need to be edited but an edit is okay.
+3. The third part is in "scoring details". Scoring is a function in our code that relies on the psychomotor values in the excel sheet as a factor to allocate the students. Please edit the elements accordingly or change the Status to "on" or "off".
 
 It consists of multiple elements in the format:
-(CCAName):(Score below criteria value)-(Score above criteria value)-(Criteria)
+(CCAName):(Score below criteria value)-(Score above criteria value)-(Criteria)-(Status)
 
 ### Run the code
 Click the file called "start.py". You should receive:
