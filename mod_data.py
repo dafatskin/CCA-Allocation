@@ -9,6 +9,8 @@ import timeit
 
 def configure_variables(config_file):
     """
+    Returns all the variables stored in the config file
+    {data type:{data}}
     """
 
     print("configuring variables...")
@@ -64,12 +66,15 @@ def configure_variables(config_file):
                         details["rankscoring"] = elements[1][i]
                     else:
                         var = elements[1][i].split("-")
-                        lst = ["Height", "30m", "IPU", "SBJ", "1km"]
+                        lst = ["Height", "Weight", "30m", "IPU", "SBJ", "1km"]
                         details[lst[i]] = {"default":var[0], "other":var[1], "criteria":var[2]}
 
                 elements.append(details)
                 del elements[1]
 
+                to_add[elements[0]] = elements[1]
+            elif section == "reassignment variables--":
+                elements = line.strip("\n").split(":")
                 to_add[elements[0]] = elements[1]
             elif section == "None":
                 pass
@@ -81,6 +86,9 @@ def configure_variables(config_file):
             
 def extract_data(file, config_vars):
     """
+    Reads all data from the file specified in config file, and writes the data to a nested dictionary
+    {sheet:{ID:{data}}
+    Returns this dictionary
     """
 
     print("extracting data...")
@@ -114,7 +122,7 @@ def extract_data(file, config_vars):
 
 def extract_sheet(file, sheetname, areas):
     """
-areas: [{slice_coords:[], ID_header:""]
+    Extracts an individual sheet, used in extract_data
     """
 
     lst = [] #will return to sheet_data
@@ -159,21 +167,26 @@ areas: [{slice_coords:[], ID_header:""]
 
 def data_to_LOS(dic):
     """
+    Returns a list of all students in directory
+    [name]
     """
 
     final_lst = []
 
-    dic_classlist = dic["classlist"][0]
+    dic_classlist = dic["classlist"][0] #relevant sheet
 
-    for key, value in classlist.items():
+    for key, value in classlist.items(): #name:data
         final_lst.append(key)
 
     del final_lst[0]
 
     return final_lst
 
+
 def data_to_LOC(dic):
     """
+    Returns a dictionary of core cca choices of each student
+    {rank of choice:{student:cca}}
     """
 
     final_dic = {} #will return to list_of_firsts
@@ -182,10 +195,10 @@ def data_to_LOC(dic):
 
     pdic = {"LO1":"CORE1", "LO2":"CORE2", "LO3":"CORE3", "LO4":"CORE4", "LO5":"CORE5", "LO6":"CORE6", "LO7":"CORE7", "LO8":"CORE8", "LO9":"CORE9"}
     qdic = {}
-    for key, value in pdic.items():
-        for NRIC, choices in dic_choices.items():
+    for key, value in pdic.items(): #for each rank:name of rank
+        for NRIC, choices in dic_choices.items(): #for each student:choices
             choice = ""
-            if choices[value] == "01SCOUT":
+            if choices[value] == "01SCOUT": #these 2 values have changes later on. Standardising
                 choice = "O1"
             elif choices[value] == "02SCOUT":
                 choice = "O2"
@@ -198,16 +211,36 @@ def data_to_LOC(dic):
     return final_dic
 
 
+def data_to_merit(dic):
+    """
+    Returns a dictionary of merit cca choices of each student
+    {student:merit cca}
+    """
+
+    final_dic = {}
+
+    dic_choices = dic["choices"][0] #relevant sheet
+
+    for NRIC, choices in dic_choices.items():
+        final_dic[NRIC] = choices["MERIT1"] #just take first choice; no limit for merit CCAs
+
+    del final_dic["NRIC"]
+
+    return final_dic
+
+
 def data_to_MEP(dic):
     """
+    Returns a list of MEP students
+    [name]
     """
 
     final_lst = []
 
-    dic_MEP = dic["MEP"][0]
+    dic_MEP = dic["MEP"][0] #relevant sheet
 
     for key, value in dic_MEP.items():
-        final_lst.append(key)
+        final_lst.append(key) #just append the name
 
     del final_lst[0]
   
@@ -216,6 +249,8 @@ def data_to_MEP(dic):
     
 def data_to_DSA(dic):
     """
+    Returns a dictionary of DSA students
+    {name:CCA}
     """
 
     final_dic = {} #will return to DSA_students
@@ -232,6 +267,8 @@ def data_to_DSA(dic):
 
 def data_to_quota(dic):
     """
+    Returns a dictionary of quota of each CCA
+    {CCA type:{CCA:quota}}
     """
 
     final_dic = {} #will return to CCA_quota
@@ -257,6 +294,8 @@ def data_to_quota(dic):
 
 def data_to_psychomotor(dic):
     """
+    Returns a dictionary of psychomotor details of each student
+    {name:{details}}
     """
 
     final_dic = {} #will return to psychomotor
@@ -274,14 +313,16 @@ def data_to_psychomotor(dic):
 
 def data_to_CCA(dic, CCA):
     """
+    Returns a dictionary of ranking details of each CCA
+    {name:{placeholder:rank}
     """
 
     final_dic = {}
 
-    dic_CCA = dic[CCA][0]
+    dic_CCA = dic[CCA][0] #the cca sheet
 
     for key, value in dic_CCA.items():
-        try:
+        try: #delete all the useless info
             del value["Class"]
         except KeyError:
             del value["CLASS"]
@@ -301,18 +342,19 @@ def data_to_CCA(dic, CCA):
 
 def data_to_nameCat(LOC, quota, rank, CCA):
     """
+    Returns a dictionary of the category of a CCA
     """
 
     final_dic = {}
     
-    dic_quota = quota.dic
+    dic_quota = quota.dic #dictionary
 
     cat = ""
 
-    for category, dic_CCAs in dic_quota.items():
-        for cca, quota in dic_CCAs.items():
+    for category, dic_CCAs in dic_quota.items(): #for each category
+        for cca, quota in dic_CCAs.items(): #for each cca
             if cca == CCA:
-                cat = category
+                cat = category #variable = category of cca
             else:
                 pass
 
@@ -327,7 +369,7 @@ def data_to_nameCat(LOC, quota, rank, CCA):
 
     try:
         for name in CCA_LOC[CCA]:
-            final_dic[name] = cat
+            final_dic[name] = cat #name:category
     except KeyError:
         pass
 
@@ -337,3 +379,21 @@ def data_to_nameCat(LOC, quota, rank, CCA):
         pass
     
     return final_dic
+
+
+def data_to_nameClass(master_list):
+    """
+    Returns a dictionary of students' classes
+    {name:class}
+    """
+
+    final_dic = {}
+
+    dic_classlist = master_list["classlist"][0] #relevant sheet
+
+    for name, data in dic_classlist.items(): 
+        final_dic[name] = data["CLASS"]
+
+    del final_dic["NAME"]
+    return final_dic
+    
