@@ -19,10 +19,14 @@ The current build status of this project is:
 ## Installation
 This program uses a .py file to run so [Python](https://www.python.org/downloads/) should be downloaded to access and run the file.
 
+Open up Windows Powershell or Command Prompt and enter the following:
+1. python -m pip install -U matplotlib
+2. pip install python-docx
+
 Click on the button shown and download the entire repository.
 ![Download](https://github.com/dafatskin/CEP_FinalProject_2018/blob/master/Screenshots/Download.PNG?raw=true)
 
-The program has been installed!
+The necessary programs should be installed and are ready to be used.
 
 ## How to Use?
 Paste your excel sheet into the folder. Make sure that all spaces in the name of the file is replaced with an underscore (i.e "_")
