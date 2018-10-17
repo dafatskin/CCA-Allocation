@@ -70,7 +70,7 @@ def plotallocationgraph(final_dic,list_of_CCA):
     for name in final_dic:
         for CCA, choice, score in final_dic:
             if CCA==CCA_no[cca]:
-                CCA-no[cca]+=1
+                CCA_no[cca]+=1
     
 
     for ccatype, cca in CCA_no:
