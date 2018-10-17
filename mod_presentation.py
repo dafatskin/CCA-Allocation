@@ -283,4 +283,4 @@ def p5_allocated(final_dic, CCA_dic, CCA_ranking, config_vars):
     del wb["classlist"]
     sheet.title = "classlist"
     
-    #wb.save("allocated1.xlsx") #uncomment later
+    wb.save("allocated1.xlsx") 
