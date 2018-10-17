@@ -1,4 +1,4 @@
-############
+#############
 #Main script#
 #############
 
@@ -89,16 +89,16 @@ def main(config_file):
         print(rank, count)
     print("Phase 4: Reassignment, complete\n")
 
-    Phase 5 Allocation#
+    #Phase 5 Allocation#
     print("Writing report...")
-    modP.final_report(final_dic, list_of_CCA)
+    #modP.final_report(CCA_dic)
     modP.p5_allocated(final_dic, CCA_dic, CCA_ranking, config_vars)
 
     os.makedirs("CCA excel sheets")
     os.makedirs("Class excel sheets")
     nameClass = modD.data_to_nameClass(master_list)
     for CCA, data in CCA_dic.items():
-        modP.p5_CCAxlsx(final_dic, CCA_dic, CCA, nameClass, config_vars)
+        modP.p5_CCAxlsx(final_dic, CCA_dic, merit_CCA_dic, CCA, nameClass, config_vars)
     for CCA, name in merit_CCA_dic.items():
         modP.p5_meritCCAxlsx(merit_dic, merit_CCA_dic, CCA, nameClass, config_vars)
     className = {}
@@ -108,10 +108,11 @@ def main(config_file):
             lst.append(name)
             className[Class] = lst
         except:
-           className[Class] = [name]
+            className[Class] = [name]
     for Class, names in className.items():
         modP.p5_classxlsx(final_dic, CCA_dic, merit_dic, Class, className, config_vars)
-
+    
+    modP.final_report(final_dic,list_of_CCA)
     
 
     print("Phase 5: Presentation, complete\n")
